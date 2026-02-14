@@ -11,7 +11,7 @@ var (
 
 func init() {
 	_config = config{
-		Port:          getEnv("WEB_PORT"),
+		Port:          getEnv("PORT"),
 		GoEnv:         getEnv("GO_ENV"),
 		Hostname:      getEnv("HOST_NAME"),
 		ServerAddress: getEnv("SERVER_ADDRESS"),
