@@ -57,9 +57,9 @@ func (a *Actions) CreateAccount(params CreateAccountParams) (CreateAccountPayloa
 	endpoint := ""
 	switch params.NewAccount.Type {
 	case "secritary":
-		endpoint = "/v1/account/secritary"
+		endpoint = "/v1/accounts/secritary"
 	case "admin":
-		endpoint = "/v1/account/admin"
+		endpoint = "/v1/accounts/admin"
 	default:
 		return CreateAccountPayload{}, errors.ErrSomethingWentWrong
 	}
@@ -91,7 +91,7 @@ type GetAccountPayload struct {
 func (a *Actions) GetAccount(params GetAccountParams) (Account, error) {
 	payload, err := makeRequest[any, GetAccountPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: fmt.Sprintf("/v1/account/%d", params.AccountId),
+		endpoint: fmt.Sprintf("/v1/accounts/%d", params.AccountId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -114,7 +114,7 @@ type DeleteAccountPayload struct {
 func (a *Actions) DeleteAccount(params DeleteAccountParams) (DeleteAccountPayload, error) {
 	payload, err := makeRequest[DeleteAccountParams, DeleteAccountPayload](makeRequestConfig[DeleteAccountParams]{
 		method:   http.MethodDelete,
-		endpoint: fmt.Sprintf("/v1/account/%d", params.AccountId),
+		endpoint: fmt.Sprintf("/v1/accounts/%d", params.AccountId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -199,7 +199,7 @@ func (a *UpdateAccountRequest) UnmarshalJSON(payload []byte) error {
 func (a *Actions) UpdateAccount(params UpdateAccountParams) (UpdateAccountPayload, error) {
 	payload, err := makeRequest[map[string]any, UpdateAccountPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPut,
-		endpoint: fmt.Sprintf("/v1/account/%d", params.AccountId),
+		endpoint: fmt.Sprintf("/v1/accounts/%d", params.AccountId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -225,7 +225,7 @@ type ListAllAccountsPayload struct {
 func (a *Actions) ListAllAccounts(params ListAllAccountsParams) ([]Account, error) {
 	payload, err := makeRequest[any, ListAllAccountsPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/account/all",
+		endpoint: "/v1/accounts",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},

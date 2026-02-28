@@ -24,7 +24,7 @@ type ListAllVirusesPayload struct {
 func (a *Actions) ListAllViruses(params ListAllVirusesParams) ([]Virus, error) {
 	payload, err := makeRequest[any, ListAllVirusesPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/virus/all",
+		endpoint: "/v1/viruses",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -94,7 +94,7 @@ type CreateVirusPayload struct {
 func (a *Actions) CreateVirus(params CreateVirusParams) (CreateVirusPayload, error) {
 	payload, err := makeRequest[CreateVirusParams, CreateVirusPayload](makeRequestConfig[CreateVirusParams]{
 		method:   http.MethodPost,
-		endpoint: "/v1/virus",
+		endpoint: "/v1/viruses",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -118,7 +118,7 @@ type DeleteVirusPayload struct {
 func (a *Actions) DeleteVirus(params DeleteVirusParams) (DeleteVirusPayload, error) {
 	payload, err := makeRequest[DeleteVirusParams, DeleteVirusPayload](makeRequestConfig[DeleteVirusParams]{
 		method:   http.MethodDelete,
-		endpoint: fmt.Sprintf("/v1/virus/%d", params.VirusId),
+		endpoint: fmt.Sprintf("/v1/viruses/%d", params.VirusId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},

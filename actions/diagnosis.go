@@ -25,7 +25,7 @@ type CreateDiagnosisPayload struct {
 func (a *Actions) CreateDiagnosis(params CreateDiagnosisParams) (CreateDiagnosisPayload, error) {
 	return makeRequest[map[string]any, CreateDiagnosisPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: "/v1/diagnosis",
+		endpoint: "/v1/diagnoses",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -46,7 +46,7 @@ type ListAllDiagnosesPayload struct {
 func (a *Actions) ListAllDiagnoses(params ListAllDiagnosesParams) ([]Diagnosis, error) {
 	payload, err := makeRequest[any, ListAllDiagnosesPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/diagnosis/all",
+		endpoint: "/v1/diagnoses",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -68,7 +68,7 @@ type DeleteDiagnosisPayload struct{}
 func (a *Actions) DeleteDiagnosis(params DeleteDiagnosisParams) (DeleteDiagnosisPayload, error) {
 	return makeRequest[any, DeleteDiagnosisPayload](makeRequestConfig[any]{
 		method:   http.MethodDelete,
-		endpoint: fmt.Sprintf("/v1/diagnosis/%d", params.DiagnosisId),
+		endpoint: fmt.Sprintf("/v1/diagnoses/%d", params.DiagnosisId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},

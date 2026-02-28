@@ -118,7 +118,7 @@ type GetPatientPayload struct {
 func (a *Actions) GetPatient(params GetPatientParams) (Patient, error) {
 	payload, err := makeRequest[any, GetPatientPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/patient/" + params.PatientId,
+		endpoint: "/v1/patients/" + params.PatientId,
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -194,7 +194,7 @@ type CreatePatientPayload struct {
 func (a *Actions) CreatePatient(params CreatePatientParams) (CreatePatientPayload, error) {
 	payload, err := makeRequest[map[string]any, CreatePatientPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: "/v1/patient",
+		endpoint: "/v1/patients",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -384,7 +384,7 @@ type CreatePatientBloodTestPayload struct {
 func (a *Actions) CreatePatientBloodTest(params CreatePatientBloodTestParams) (CreatePatientBloodTestPayload, error) {
 	return makeRequest[map[string]any, CreatePatientBloodTestPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: "/v1/patient/bloodtest",
+		endpoint: "/v1/patients/bloodtest",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -408,7 +408,7 @@ type UpdatePatientPendingBloodTestPayload struct {
 func (a *Actions) UpdatePatientPendingBloodTest(params UpdatePatientPendingBloodTestParams) (UpdatePatientPendingBloodTestPayload, error) {
 	return makeRequest[map[string]any, UpdatePatientPendingBloodTestPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPut,
-		endpoint: fmt.Sprintf("/v1/patient/%s/bloodtest/%s/pending", params.PatientId, params.BloodTestResultId),
+		endpoint: fmt.Sprintf("/v1/patients/%s/bloodtest/%s/pending", params.PatientId, params.BloodTestResultId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -501,7 +501,7 @@ func (a *Actions) CreatePatientJointsEvaluation(params CreatePatientJointsEvalua
 
 	return makeRequest[map[string]any, CreatePatientJointsEvaluationPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: fmt.Sprintf("/v1/patient/%s/joints-evaluation", params.PatientId),
+		endpoint: fmt.Sprintf("/v1/patients/%s/joints-evaluation", params.PatientId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -546,7 +546,7 @@ func (a *Actions) CreatePatientDiagnosisResult(params CreatePatientDiagnosisResu
 
 	return makeRequest[map[string]any, CreatePatientDiagnosisResultPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: "/v1/patient/diagnosis",
+		endpoint: "/v1/patients/diagnosis",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -575,7 +575,7 @@ type DeletePatientPayload struct {
 func (a *Actions) DeletePatient(params DeletePatientParams) (DeletePatientPayload, error) {
 	return makeRequest[any, DeletePatientPayload](makeRequestConfig[any]{
 		method:   http.MethodDelete,
-		endpoint: "/v1/patient/" + params.PatientId,
+		endpoint: "/v1/patients/" + params.PatientId,
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -696,7 +696,7 @@ type CreatePatientCheckUpPayload struct {
 func (a *Actions) CreatePatientCheckUp(params CreatePatientCheckUpParams) (CreatePatientCheckUpPayload, error) {
 	return makeRequest[map[string]any, CreatePatientCheckUpPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: "/v1/patient/" + params.PatientId + "/checkup",
+		endpoint: "/v1/patients/" + params.PatientId + "/checkup",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -720,7 +720,7 @@ type UseMedicineForVisitPayload struct {
 func (a *Actions) UseMedicineForVisit(params UseMedicineForVisitParams) (UseMedicineForVisitPayload, error) {
 	return makeRequest[map[string]any, UseMedicineForVisitPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: fmt.Sprintf("/v1/patient/visit/%s/medicine/%s", params.VisitId, params.PrescribedMedicineId),
+		endpoint: fmt.Sprintf("/v1/patients/visit/%s/medicine/%s", params.VisitId, params.PrescribedMedicineId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -744,7 +744,7 @@ type GeneratePatientCardPayload struct {
 func (a *Actions) GeneratePatientCard(params GeneratePatientCardParams) (GeneratePatientCardPayload, error) {
 	return makeRequest[any, GeneratePatientCardPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/patient/" + params.PatientId + "/card",
+		endpoint: "/v1/patients/" + params.PatientId + "/card",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -769,7 +769,7 @@ type GetPatientLastVisitPayload struct {
 func (a *Actions) GetPatientLastVisit(params GetPatientLastVisitParams) (GetPatientLastVisitPayload, error) {
 	return makeRequest[any, GetPatientLastVisitPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/patient/last-visit",
+		endpoint: "/v1/me/patient/last-visit",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -792,7 +792,7 @@ type ListPatientVisitsPayload struct {
 func (a *Actions) ListPatientVisits(params ListPatientVisitsParams) ([]Visit, error) {
 	payload, err := makeRequest[any, ListPatientVisitsPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/patient/" + params.PatientId + "/visits",
+		endpoint: "/v1/patients/" + params.PatientId + "/visits",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},

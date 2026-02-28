@@ -35,7 +35,7 @@ type ListAllMedicinesPayload struct {
 func (a *Actions) ListAllMedicines(params ListAllMedicinesParams) ([]Medicine, error) {
 	payload, err := makeRequest[any, ListAllMedicinesPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/medicine/all",
+		endpoint: "/v1/medicines",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -100,7 +100,7 @@ func (a *Actions) CreateMedicine(params CreateMedicineParams) (CreateMedicinePay
 
 	payload, err := makeRequest[map[string]any, CreateMedicinePayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: "/v1/medicine",
+		endpoint: "/v1/medicines",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -126,7 +126,7 @@ type DeleteMedicinePayload struct {
 func (a *Actions) DeleteMedicine(params DeleteMedicineParams) (DeleteMedicinePayload, error) {
 	payload, err := makeRequest[DeleteMedicineParams, DeleteMedicinePayload](makeRequestConfig[DeleteMedicineParams]{
 		method:   http.MethodDelete,
-		endpoint: fmt.Sprintf("/v1/medicine/%d", params.MedicineId),
+		endpoint: fmt.Sprintf("/v1/medicines/%d", params.MedicineId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -151,7 +151,7 @@ type GetMedicinePayload struct {
 func (a *Actions) GetMedicine(params GetMedicineParams) (Medicine, error) {
 	payload, err := makeRequest[any, GetMedicinePayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/medicine/" + strconv.Itoa(int(params.MedicineId)),
+		endpoint: "/v1/medicines/" + strconv.Itoa(int(params.MedicineId)),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -180,7 +180,7 @@ func (a *Actions) UpdateMedicine(params UpdateMedicineParams) (UpdateMedicinePay
 
 	payload, err := makeRequest[map[string]any, UpdateMedicinePayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPut,
-		endpoint: fmt.Sprintf("/v1/medicine/%d/amount", params.MedicineId),
+		endpoint: fmt.Sprintf("/v1/medicines/%d/amount", params.MedicineId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},

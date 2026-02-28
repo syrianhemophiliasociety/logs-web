@@ -51,7 +51,7 @@ type ListAllBloodTestsPayload struct {
 func (a *Actions) ListAllBloodTests(params ListAllBloodTestsParams) ([]BloodTest, error) {
 	payload, err := makeRequest[any, ListAllBloodTestsPayload](makeRequestConfig[any]{
 		method:   http.MethodGet,
-		endpoint: "/v1/bloodtest/all",
+		endpoint: "/v1/bloodtests",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -107,7 +107,7 @@ func (a *Actions) CreateBloodTest(params CreateBloodTestParams) (CreateBloodTest
 
 	payload, err := makeRequest[map[string]any, CreateBloodTestPayload](makeRequestConfig[map[string]any]{
 		method:   http.MethodPost,
-		endpoint: "/v1/bloodtest",
+		endpoint: "/v1/bloodtests",
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
@@ -133,7 +133,7 @@ type DeleteBloodTestPayload struct {
 func (a *Actions) DeleteBloodTest(params DeleteBloodTestParams) (DeleteBloodTestPayload, error) {
 	payload, err := makeRequest[DeleteBloodTestParams, DeleteBloodTestPayload](makeRequestConfig[DeleteBloodTestParams]{
 		method:   http.MethodDelete,
-		endpoint: fmt.Sprintf("/v1/bloodtest/%d", params.BloodTestId),
+		endpoint: fmt.Sprintf("/v1/bloodtests/%d", params.BloodTestId),
 		headers: map[string]string{
 			"Authorization": params.SessionToken,
 		},
