@@ -449,6 +449,9 @@ templ medicineInCheckUp(medicines []actions.Medicine) {
 	{{
 		options := make([]components.SelectOption, 0, len(medicines))
 		for _, m := range medicines {
+			if m.Amount == 0 {
+				continue
+			}
 			options = append(options, components.SelectOption{
 				Name:  fmt.Sprintf("%s %s", m.Name, m.DoseUnit()),
 				Value: strconv.Itoa(int(m.Id)),
